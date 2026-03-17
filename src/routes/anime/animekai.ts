@@ -53,7 +53,11 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
       reply.status(200).send(res);
     } catch (error) {
       reply.status(500).send({
-        message: 'Something went wrong. Contact developer for help.',
+        // message: 'Something went wrong. Contact developer for help.',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong. Contact developer for help.',
       });
     }
   });
