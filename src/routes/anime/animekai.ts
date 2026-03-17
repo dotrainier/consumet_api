@@ -52,13 +52,15 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
 
       reply.status(200).send(res);
     } catch (error) {
+      console.error('[AnimeKai /:query Error]', error);
       reply.status(500).send({
         message:
           error instanceof Error
             ? error.message
             : typeof error === 'string'
-            ? error
-            : JSON.stringify(error),
+              ? error
+              : JSON.stringify(error),
+        error: error,
       });
     }
   });
